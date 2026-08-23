@@ -4,9 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm run test:a11y",
+    "build:app": "ng build",
+    "preview": "serve -s dist/novan-site-template/browser",
+    "test:a11y": "npm run build:app && playwright test",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "npm run test:a11y"
   },
   "private": true,
   "packageManager": "npm@11.13.0",
@@ -26,7 +29,12 @@
     "@angular/build": "^22.1.5",
     "@angular/cli": "^22.1.5",
     "@angular/compiler-cli": "^22.1.0",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1",
+    "axe-core": "^4.13.0",
+    "playwright": "^1.62.1",
     "prettier": "^3.8.1",
+    "serve": "^14.2.6",
     "typescript": "~6.0.2"
   }
 }

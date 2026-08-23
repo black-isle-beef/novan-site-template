@@ -39,3 +39,19 @@ Build the production bundle with:
 ```bash
 npm.cmd run build
 ```
+
+## Accessibility Testing
+
+The build runs an automated axe-core scan against the production bundle in Chromium. It checks every application route for WCAG 2.2 AA violations and fails the build when any are found.
+
+Install the Chromium browser once after installing dependencies:
+
+```bash
+npx.cmd playwright install chromium
+```
+
+To run only the accessibility suite:
+
+```bash
+npm.cmd run test:a11y
+```

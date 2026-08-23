@@ -8,8 +8,9 @@ import { HeaderComponent } from './layout/header/header.component';
   selector: 'app-root',
   imports: [FooterComponent, HeaderComponent, RouterOutlet],
   template: `
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <app-header />
-    <main class="container py-4 flex-grow-1"><router-outlet /></main>
+    <main id="main-content" class="container py-4 flex-grow-1" tabindex="-1"><router-outlet /></main>
     <app-footer />
   `,
 })
