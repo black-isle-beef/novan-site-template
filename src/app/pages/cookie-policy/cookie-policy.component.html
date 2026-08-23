@@ -1,5 +1,125 @@
-<article class="py-4">
-  <h1>Cookie Policy</h1>
-  <p class="lead">This starter includes a placeholder for your cookie policy.</p>
-  <p>Document the cookies and similar technologies used by your organization here.</p>
-</article>
+<dialog class="cookie-modal" (cancel)="onDialogCancel($event)">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2 class="modal-title">Cookie Preferences</h2>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <p class="mb-4">
+          We use cookies to enhance your browsing experience, serve personalized ads or
+          content, and analyze our traffic. By clicking "Accept All", you consent to our use
+          of cookies.
+        </p>
+
+        <!-- Bootstrap Accordion -->
+        <div class="accordion" id="cookieAccordion">
+          <div
+            *ngFor="let category of categories; let i = index"
+            class="accordion-item"
+          >
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button"
+                [class.collapsed]="i !== 0"
+                type="button"
+                [attr.data-bs-toggle]="'collapse'"
+                [attr.data-bs-target]="'#collapse' + category.id"
+                [attr.aria-expanded]="i === 0"
+                [attr.aria-controls]="'collapse' + category.id"
+              >
+                <span class="fw-semibold">{{ category.name }}</span>
+                <span
+                  *ngIf="!category.required"
+                  class="ms-2 badge bg-secondary"
+                  >Optional</span
+                >
+                <span *ngIf="category.required" class="ms-2 badge bg-success"
+                  >Required</span
+                >
+              </button>
+            </h2>
+
+            <div
+              [id]="'collapse' + category.id"
+              class="accordion-collapse collapse"
+              [class.show]="i === 0"
+              [attr.data-bs-parent]="'#cookieAccordion'"
+            >
+              <div class="accordion-body">
+                <div class="mb-3">
+                  <p class="text-body-secondary">{{ category.description }}</p>
+                </div>
+
+                <!-- Cookie Info Table -->
+                <div class="table-responsive">
+                  <table class="table table-sm table-hover">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Cookie Name</th>
+                        <th>Duration</th>
+                        <th>Purpose</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let cookie of category.cookies">
+                        <td class="fw-semibold">{{ cookie.name }}</td>
+                        <td>{{ cookie.duration }}</td>
+                        <td class="text-body-secondary">{{ cookie.description }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Checkbox for non-required categories -->
+                <div *ngIf="!category.required" class="mt-3">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      [id]="category.id"
+                      [checked]="getConsentValue(category.id)"
+                      (change)="updateConsent(category.id, $any($event.target).checked)"
+                    />
+                    <label class="form-check-label" [for]="category.id">
+                      Allow {{ category.name }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="d-flex gap-2">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="rejectAll()"
+          >
+            Reject All
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="acceptAll()"
+          >
+            Accept All
+          </button>
+        </div>
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="saveSelection()"
+        >
+          Save Selection
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>

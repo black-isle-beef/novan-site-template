@@ -1,0 +1,21 @@
+<div class="cookie-banner" *ngIf="showBanner" role="region" aria-label="Cookie consent" aria-live="polite">
+  <div class="banner-container">
+    <div class="banner-content">
+      <p class="banner-text">
+        We use cookies to enhance your browsing experience and analyze site traffic. By continuing
+        to use our site, you consent to our use of cookies.
+      </p>
+    </div>
+    <div class="banner-actions">
+      <button class="btn btn-sm btn-outline-secondary" (click)="rejectAll()">
+        Decline
+      </button>
+      <button class="btn btn-sm btn-link" (click)="managePreferences()">
+        Manage Preferences
+      </button>
+      <button class="btn btn-sm btn-primary" (click)="acceptAll()">
+        Accept
+      </button>
+    </div>
+  </div>
+</div>

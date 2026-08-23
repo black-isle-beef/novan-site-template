@@ -16,7 +16,7 @@
       <small class="text-body-secondary">{{ siteConfig.copyrightNotice }}</small>
       <div class="d-flex gap-3">
         <a class="footer-link" routerLink="/privacy">Privacy Policy</a>
-        <a class="footer-link" routerLink="/cookie-policy">Cookie Policy</a>
+        <button type="button" class="footer-link footer-cookie-button" (click)="showCookiePreferences()">Cookie Policy</button>
       </div>
     </div>
   </div>
