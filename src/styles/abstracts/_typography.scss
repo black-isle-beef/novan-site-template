@@ -1,6 +1,6 @@
 // Change these font stacks to retheme the entire site.
-$site-font-family: 'Avenir Next', 'Segoe UI', sans-serif;
-$site-heading-font-family: Georgia, 'Times New Roman', serif;
+$site-font-family: 'Montserrat', sans-serif;
+$site-heading-font-family: 'Montserrat', sans-serif;
 $site-base-font-size: 1rem;
 $site-heading-font-weight: 600;
 $site-heading-scale: (
@@ -11,5 +11,3 @@ $site-heading-scale: (
 	5: 1.25rem,
 	6: 1rem
 );
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap');

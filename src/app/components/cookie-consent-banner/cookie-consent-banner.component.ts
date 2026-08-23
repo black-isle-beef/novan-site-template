@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { skip } from 'rxjs';
+import { SiteConfigService } from '../../core/config/site-config.service';
 import { CookieConsentService } from '../../core/services/cookie-consent.service';
 
 @Component({
@@ -11,11 +12,16 @@ import { CookieConsentService } from '../../core/services/cookie-consent.service
   styleUrls: ['./cookie-consent-banner.component.scss'],
 })
 export class CookieConsentBannerComponent implements OnInit {
+  private siteConfigService = inject(SiteConfigService);
   private cookieConsentService = inject(CookieConsentService);
 
   showBanner = false;
 
   ngOnInit(): void {
+    if (!this.siteConfigService.cookieBannerEnabled) {
+      return;
+    }
+
     // Show banner only if user hasn't consented yet
     if (!this.cookieConsentService.hasUserConsented()) {
       this.showBanner = true;

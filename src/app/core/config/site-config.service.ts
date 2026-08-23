@@ -15,6 +15,10 @@ export class SiteConfigService {
     return this.config.brandTagline;
   }
 
+  get cookieBannerEnabled(): boolean {
+    return this.config.cookieBannerEnabled;
+  }
+
   get socialLinks(): SiteConfig['socialLinks'] {
     return this.config.socialLinks;
   }

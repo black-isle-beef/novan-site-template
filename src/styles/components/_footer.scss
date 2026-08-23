@@ -12,6 +12,15 @@
   color: theme.$link-hover-color;
 }
 
+[data-bs-theme='dark'] .footer-link:hover,
+[data-bs-theme='dark'] .footer-link:focus,
+[data-bs-theme='dark'] .footer-link:focus-visible,
+[data-bs-theme='dark'] .footer-cookie-button:hover,
+[data-bs-theme='dark'] .footer-cookie-button:focus,
+[data-bs-theme='dark'] .footer-cookie-button:focus-visible {
+  color: #ffffff;
+}
+
 .social-link {
   align-items: center;
   display: inline-flex;
