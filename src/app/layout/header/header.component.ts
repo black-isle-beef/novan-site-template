@@ -8,6 +8,7 @@ import { SiteConfigService } from '../../core/config/site-config.service';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
 })

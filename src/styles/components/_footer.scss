@@ -5,7 +5,7 @@
 }
 
 [data-bs-theme='dark'] .footer-link {
-  color: #8bd3dd;
+  color: var(--bs-info);
 }
 
 .footer-link:hover {
@@ -18,7 +18,7 @@
 [data-bs-theme='dark'] .footer-cookie-button:hover,
 [data-bs-theme='dark'] .footer-cookie-button:focus,
 [data-bs-theme='dark'] .footer-cookie-button:focus-visible {
-  color: #ffffff;
+  color: var(--bs-light);
 }
 
 .social-link {

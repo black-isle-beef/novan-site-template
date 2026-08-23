@@ -6,6 +6,7 @@ import { SiteConfigService } from '../../core/config/site-config.service';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [NgOptimizedImage, RouterLink],
   templateUrl: './home.component.html',
 })

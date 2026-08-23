@@ -1,6 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
+import { Component, effect, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import {
   CookieConsentService,
@@ -11,31 +13,37 @@ import {
 @Component({
   selector: 'app-cookie-policy',
   templateUrl: './cookie-policy.component.html',
-  styleUrls: ['./cookie-policy.component.scss'],
+  styles: [],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
 })
-export class CookiePolicyComponent implements OnInit {
+export class CookiePolicyComponent {
   private cookieConsentService = inject(CookieConsentService);
+  private document = inject(DOCUMENT);
+  private router = inject(Router);
 
-  categories: CookieCategory[] = [];
-  currentConsent: CookieConsent = { necessary: true, performance: false, analytics: false };
-  isModalVisible = false;
+  readonly categories = signal<CookieCategory[]>(this.cookieConsentService.getCookieCategories());
+  readonly currentConsent = signal<CookieConsent>(this.cookieConsentService.getConsent());
+  readonly isModalVisible = toSignal(this.cookieConsentService.modalVisible$, {
+    initialValue: false,
+  });
 
-  ngOnInit(): void {
-    this.categories = this.cookieConsentService.getCookieCategories();
-    this.currentConsent = this.cookieConsentService.getConsent();
+  isPolicyRoute(): boolean {
+    return this.router.url === '/cookie-policy';
+  }
 
-    this.cookieConsentService.isModalVisible().subscribe((visible) => {
-      this.isModalVisible = visible;
-      setTimeout(() => {
-        const dialog = document.querySelector('dialog[class="cookie-modal"]') as HTMLDialogElement;
-        if (visible && dialog) {
-          dialog.showModal();
-        } else if (dialog && dialog.open) {
-          dialog.close();
-        }
-      }, 0);
+  constructor() {
+    effect(() => {
+      const dialog = this.document.querySelector<HTMLDialogElement>('dialog.cookie-modal');
+      if (!dialog) {
+        return;
+      }
+
+      if (this.isModalVisible() && !dialog.open) {
+        dialog.showModal();
+      } else if (!this.isModalVisible() && dialog.open) {
+        dialog.close();
+      }
     });
   }
 
@@ -46,26 +54,31 @@ export class CookiePolicyComponent implements OnInit {
 
   getConsentValue(categoryId: string): boolean {
     const key = categoryId as keyof CookieConsent;
-    return this.currentConsent[key] ?? false;
+    return this.currentConsent()[key] ?? false;
   }
 
   updateConsent(categoryId: string, value: boolean): void {
     const key = categoryId as keyof CookieConsent;
-    this.currentConsent[key] = value;
+    this.currentConsent.update((consent) => ({ ...consent, [key]: value }));
+  }
+
+  onCategoryToggle(categoryId: string, event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.updateConsent(categoryId, target.checked);
   }
 
   acceptAll(): void {
-    this.currentConsent = { necessary: true, performance: true, analytics: true };
+    this.currentConsent.set({ necessary: true, performance: true, analytics: true });
     this.cookieConsentService.acceptAll();
   }
 
   rejectAll(): void {
-    this.currentConsent = { necessary: true, performance: false, analytics: false };
+    this.currentConsent.set({ necessary: true, performance: false, analytics: false });
     this.cookieConsentService.rejectAll();
   }
 
   saveSelection(): void {
-    this.cookieConsentService.saveSelection(this.currentConsent);
+    this.cookieConsentService.saveSelection(this.currentConsent());
   }
 
   closeModal(): void {

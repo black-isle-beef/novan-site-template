@@ -1,4 +1,5 @@
-<div class="cookie-banner" *ngIf="showBanner" role="region" aria-label="Cookie consent" aria-live="polite">
+@if (showBanner()) {
+<div class="cookie-banner" role="region" aria-label="Cookie consent" aria-live="polite">
   <div class="banner-container">
     <div class="banner-content">
       <p class="banner-text">
@@ -19,3 +20,4 @@
     </div>
   </div>
 </div>
+}

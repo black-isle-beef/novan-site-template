@@ -1,7 +1,7 @@
 <section class="py-4">
   <h1>Contact</h1>
   <p class="lead">Tell us what you are building.</p>
-  <form class="col-lg-8 mt-4" (submit)="$event.preventDefault()">
+  <form class="col-lg-8 mt-4" (ngSubmit)="$event.preventDefault()" #contactForm="ngForm">
     <div class="mb-3">
       <label class="form-label" for="name">Name</label>
       <input class="form-control" id="name" name="name" type="text" required />

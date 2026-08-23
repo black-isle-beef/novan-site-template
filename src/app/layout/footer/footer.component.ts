@@ -6,9 +6,10 @@ import { CookieConsentService } from '../../core/services/cookie-consent.service
 
 @Component({
   selector: 'app-footer',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+  styles: [],
 })
 export class FooterComponent {
   readonly siteConfig = inject(SiteConfigService);

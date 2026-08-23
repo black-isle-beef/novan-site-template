@@ -5,6 +5,7 @@ import { SiteConfigService } from '../../core/config/site-config.service';
 
 @Component({
   selector: 'app-about',
+  standalone: true,
   imports: [NgOptimizedImage],
   templateUrl: './about.component.html',
 })
