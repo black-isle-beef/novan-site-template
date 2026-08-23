@@ -1,0 +1,10 @@
+@use '../abstracts/variables' as theme;
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #{theme.$link-hover-color};
+  --bs-btn-hover-border-color: #{theme.$link-hover-color};
+  --bs-btn-active-bg: #{theme.$link-hover-color};
+  --bs-btn-active-border-color: #{theme.$link-hover-color};
+}

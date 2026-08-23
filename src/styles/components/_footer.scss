@@ -1,0 +1,22 @@
+@use '../abstracts/variables' as theme;
+
+.footer-link {
+  color: theme.$link-color;
+}
+
+[data-bs-theme='dark'] .footer-link {
+  color: #8bd3dd;
+}
+
+.footer-link:hover {
+  color: theme.$link-hover-color;
+}
+
+.social-link {
+  align-items: center;
+  display: inline-flex;
+  font-size: 1.25rem;
+  justify-content: center;
+  min-height: 2.5rem;
+  min-width: 2.5rem;
+}

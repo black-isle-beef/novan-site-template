@@ -1,0 +1,27 @@
+@use 'typography' as type;
+
+// Bootstrap theme overrides.
+$primary: #176b87;
+$secondary: #e07a5f;
+$success: #3f8f6b;
+$body-bg: #f7f5ef;
+$body-color: #243238;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: $breakpoint-md,
+	lg: $breakpoint-lg,
+	xl: 1200px,
+	xxl: 1400px
+);
+
+// Keep Bootstrap's typography settings tied to the single site configuration.
+$font-family-sans-serif: type.$site-font-family;
+$font-family-base: type.$site-font-family;
+$headings-font-family: type.$site-heading-font-family;
+$headings-font-weight: type.$site-heading-font-weight;
+$font-size-base: type.$site-base-font-size;
+$link-color: $primary;
+$link-hover-color: #104b5e;

@@ -1,0 +1,35 @@
+.skip-link {
+  left: 1rem;
+  position: fixed;
+  top: 1rem;
+  transform: translateY(-200%);
+  z-index: 1050;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.form-switch .form-check-input.theme-switch {
+  --bs-form-switch-width: 2.5rem;
+  height: 1.5rem;
+  width: 2.5rem;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+app-root {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 100vh;
+}
