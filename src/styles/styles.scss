@@ -30,6 +30,66 @@
 
 @use 'bootstrap-icons/font/bootstrap-icons';
 
+.site-hero {
+  align-items: center;
+  background-color: #172126;
+  color: #f7f5ef;
+  display: flex;
+  min-height: min(32rem, calc(100vh - 8rem));
+  padding: clamp(3rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem);
+  position: relative;
+}
+
+.site-hero::before {
+  background: rgba(8, 14, 16, 0.58);
+  content: '';
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.site-hero-image {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.site-hero-content {
+  margin: 0 auto;
+  max-width: 75rem;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.site-hero .text-uppercase {
+  color: #a8d7dc;
+}
+
+.site-hero-about {
+  .site-hero-image {
+    object-position: center 42%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .site-hero {
+    min-height: 28rem;
+  }
+
+  .site-hero-home {
+    .site-hero-image {
+      object-position: 62% center;
+    }
+  }
+
+  .site-hero-about {
+    .site-hero-image {
+      object-position: 64% center;
+    }
+  }
+}
+
 :root:not([data-bs-theme]),
 [data-bs-theme='light'] {
   --bs-primary-rgb: 23, 107, 135;
