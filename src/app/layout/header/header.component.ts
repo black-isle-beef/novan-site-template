@@ -25,6 +25,7 @@ export class HeaderComponent {
   constructor() {
     this.darkMode.set(this.getTheme() === 'dark');
     this.applyTheme();
+    this.watchSystemTheme();
 
     this.router.events
       .pipe(
@@ -54,9 +55,32 @@ export class HeaderComponent {
       return savedTheme;
     }
 
+    return this.getSystemTheme();
+  }
+
+  private getSystemTheme(): 'dark' | 'light' {
     return this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)').matches
       ? 'dark'
       : 'light';
+  }
+
+  private watchSystemTheme(): void {
+    const mediaQueryList = this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)');
+    if (!mediaQueryList) {
+      return;
+    }
+
+    const updateTheme = (): void => {
+      if (localStorage.getItem('theme')) {
+        return;
+      }
+
+      this.darkMode.set(this.getSystemTheme() === 'dark');
+      this.applyTheme();
+    };
+
+    mediaQueryList.addEventListener('change', updateTheme);
+    this.destroyRef.onDestroy(() => mediaQueryList.removeEventListener('change', updateTheme));
   }
 
   private applyTheme(): void {

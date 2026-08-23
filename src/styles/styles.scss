@@ -17,6 +17,10 @@
   --bs-link-hover-color: #{$link-hover-color};
 }
 
+[data-bs-theme='dark'] {
+  --bs-primary-rgb: 110, 168, 254;
+}
+
 h1,
 h2,
 h3,
@@ -95,6 +99,10 @@ app-root {
 
 .footer-link {
   color: $link-color;
+}
+
+[data-bs-theme='dark'] .footer-link {
+  color: #8bd3dd;
 }
 
 .footer-link:hover {
