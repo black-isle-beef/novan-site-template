@@ -4,6 +4,14 @@
   color: theme.$link-color;
 }
 
+.footer-cookie-button {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  padding: 0;
+}
+
 [data-bs-theme='dark'] .footer-link {
   color: var(--bs-info);
 }
