@@ -1,0 +1,13 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-about',
+  template: `
+    <section class="py-4">
+      <h1>About Novan</h1>
+      <p class="lead">We create calm, capable digital foundations for ambitious teams.</p>
+      <p>This starter page is ready for your story, principles, and team introduction.</p>
+    </section>
+  `,
+})
+export class AboutComponent {}
