@@ -4,12 +4,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
 
+import { SiteConfigService } from '../../core/config/site-config.service';
+
 @Component({
   selector: 'app-header',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
+  readonly siteConfig = inject(SiteConfigService);
   readonly menuOpen = signal(false);
   readonly darkMode = signal(false);
   readonly navigationLinks = [
