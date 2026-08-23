@@ -1,0 +1,53 @@
+<header>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" routerLink="/" (click)="closeMenu()"> NOVAN </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        aria-controls="main-navigation"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Toggle navigation"
+        (click)="toggleMenu()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="main-navigation" class="collapse navbar-collapse d-lg-flex" [class.show]="menuOpen()">
+        <ul class="navbar-nav ms-lg-auto gap-lg-2">
+          @for (link of navigationLinks; track link.path) {
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLink]="link.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+                (click)="closeMenu()"
+              >
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+        <div class="d-flex align-items-center gap-2 ms-lg-3 mt-3 mt-lg-0">
+          <span class="theme-icon text-body fs-5" aria-hidden="true">
+            <i class="bi bi-sun"></i>
+          </span>
+          <div class="form-check form-switch mb-0">
+            <input
+              id="theme-switch"
+              class="form-check-input theme-switch mt-0"
+              type="checkbox"
+              role="switch"
+              [checked]="darkMode()"
+              (change)="toggleTheme()"
+            />
+            <label class="visually-hidden" for="theme-switch">Dark mode</label>
+          </div>
+          <span class="theme-icon text-body fs-5" aria-hidden="true">
+            <i class="bi bi-moon"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

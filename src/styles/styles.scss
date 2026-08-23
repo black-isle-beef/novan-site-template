@@ -1,6 +1,40 @@
-@import 'variables';
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons.css';
+@use 'variables' as *;
+
+:root:not([data-bs-theme]),
+[data-bs-theme='light'] {
+  --bs-primary: #{$primary};
+  --bs-primary-rgb: 23, 107, 135;
+  --bs-secondary: #{$secondary};
+  --bs-secondary-rgb: 224, 122, 95;
+  --bs-success: #{$success};
+  --bs-success-rgb: 63, 143, 107;
+  --bs-body-bg: #{$body-bg};
+  --bs-body-bg-rgb: 247, 245, 239;
+  --bs-body-color: #{$body-color};
+  --bs-body-color-rgb: 36, 50, 56;
+  --bs-body-font-family: #{$font-family-sans-serif};
+  --bs-link-color: #{$link-color};
+  --bs-link-hover-color: #{$link-hover-color};
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: #{$headings-font-family};
+  font-weight: $headings-font-weight;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #{$link-hover-color};
+  --bs-btn-hover-border-color: #{$link-hover-color};
+  --bs-btn-active-bg: #{$link-hover-color};
+  --bs-btn-active-border-color: #{$link-hover-color};
+}
 
 html,
 body {
@@ -36,6 +70,20 @@ app-root {
   letter-spacing: 0.04em;
 }
 
+.navbar-toggler,
+.navbar-nav .nav-link {
+  align-items: center;
+  display: inline-flex;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+}
+
+.form-switch .form-check-input.theme-switch {
+  --bs-form-switch-width: 2.5rem;
+  height: 1.5rem;
+  width: 2.5rem;
+}
+
 .social-link {
   align-items: center;
   display: inline-flex;
@@ -43,4 +91,12 @@ app-root {
   justify-content: center;
   min-height: 2.5rem;
   min-width: 2.5rem;
+}
+
+.footer-link {
+  color: $link-color;
+}
+
+.footer-link:hover {
+  color: $link-hover-color;
 }

@@ -50,6 +50,25 @@ test('mobile navigation exposes its expanded state to assistive technology', asy
   await expect(menuButton).toHaveAttribute('aria-expanded', 'true');
 });
 
+test('theme switch updates and persists the Bootstrap color mode', async ({ page }) => {
+  await page.goto('/');
+
+  const themeSwitch = page.getByRole('switch', { name: 'Dark mode' });
+  const themeIcons = page.locator('.theme-icon');
+  await expect(themeIcons).toHaveCount(2);
+  await expect(themeIcons.nth(0).locator('.bi-sun')).toBeVisible();
+  await expect(themeIcons.nth(1).locator('.bi-moon')).toBeVisible();
+  await expect(themeIcons.nth(0)).toHaveCSS('color', 'rgb(36, 50, 56)');
+  await expect(themeSwitch).not.toBeChecked();
+  await themeSwitch.check();
+  await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
+  await expect(themeIcons.nth(0)).toHaveCSS('color', 'rgb(222, 226, 230)');
+
+  await page.reload();
+  await expect(themeSwitch).toBeChecked();
+  await expect(page.locator('html')).toHaveAttribute('data-bs-theme', 'dark');
+});
+
 test('contact form controls have programmatic labels and required states', async ({ page }) => {
   await page.goto('/contact');
 
