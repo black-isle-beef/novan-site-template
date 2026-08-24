@@ -1,0 +1,15 @@
+{
+  "name": "@novan/site-kit",
+  "version": "0.1.0",
+  "description": "Reusable Angular site shell, pages, consent services, styles, assets, and authoring skills.",
+  "peerDependencies": {
+    "@angular/common": "^22.1.0",
+    "@angular/core": "^22.1.0",
+    "@angular/forms": "^22.1.0",
+    "@angular/platform-browser": "^22.1.0",
+    "@angular/router": "^22.1.0",
+    "bootstrap": "^5.3.8",
+    "rxjs": "^7.8.0"
+  },
+  "sideEffects": false
+}

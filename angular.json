@@ -6,6 +6,25 @@
   },
   "newProjectRoot": "projects",
   "projects": {
+    "novan-site-kit": {
+      "projectType": "library",
+      "root": "projects/novan-site-kit",
+      "sourceRoot": "projects/novan-site-kit/src",
+      "prefix": "novan",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "options": {
+            "project": "projects/novan-site-kit/ng-package.json"
+          },
+          "configurations": {
+            "production": {},
+            "development": {}
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
     "novan-site-template": {
       "projectType": "application",
       "schematics": {
