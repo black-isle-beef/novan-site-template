@@ -27,7 +27,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .github/skills/angular-s
 Capture the complete output and group every finding under these categories:
 
 1. **Modern Angular architecture**: NgModules, missing standalone metadata, structural directives, legacy inputs/outputs, manual subscriptions, untyped values, and component stylesheet references.
-2. **Global SCSS and Bootstrap compliance**: inline styles, component stylesheets, hardcoded colors, hardcoded pixel layout values, missing global `@use` entries, and custom rules replaceable by Bootstrap utilities.
+2. **Global styles and Tailwind CSS compliance**: inline styles, component stylesheets, hardcoded colors, hardcoded pixel layout values, missing global style imports, and custom rules replaceable by Tailwind utilities.
 3. **Tokens and site configuration**: brand names, emails, URLs, legal copy, copyright years, social links, and other repeated content outside `SITE_CONFIG`/`SiteConfigService`.
 4. **Accessibility and semantic HTML**: missing image alt text, unlabeled controls, invalid ARIA, generic landmark containers, heading-order problems, keyboard-inaccessible interactions, and incorrect button/link semantics.
 
@@ -40,7 +40,7 @@ Before editing, state the number of findings per category and identify any audit
 - Confirm Angular bootstrap is standalone and remove actual NgModule declarations or imports. Do not remove ordinary `imports` arrays from standalone component metadata; those are valid and required.
 - Define or extend interfaces for every shared data structure. Replace `any` with a specific type or `unknown` plus runtime narrowing.
 - Extend `SiteConfig` for content that is currently duplicated or hardcoded. Expose values through `SiteConfigService` and inject it into consumers.
-- Ensure `src/styles/styles.scss` owns the global cascade and uses the existing `abstracts/` and `components/` partials. Use the repository's established Bootstrap import order.
+- Ensure the global stylesheet owns the cascade, imports Tailwind CSS using the repository's configured integration, and keeps reusable tokens/components in the established style structure. Preserve SCSS partials only where they remain part of the configured styling architecture.
 
 ### 2.2 Component and template migration
 
@@ -51,7 +51,7 @@ Process components one at a time, starting with shared layout components and the
 - Replace `@Input()` with `input()` and `@Output()` with `output()`. Update all call sites and use signal reads correctly in templates and TypeScript.
 - Replace local mutable state with `signal()` and derived state with `computed()` where this improves correctness. Keep RxJS for genuine streams and prefer `async` or a signal bridge over manual subscriptions.
 - Remove `styleUrl`/`styleUrls` and set `styles: []` or omit the property. Move required rules into the correct `src/styles/components/` partial, then delete the obsolete component stylesheet only when no imports or references remain.
-- Replace inline styles and static layout CSS with Bootstrap utilities when they provide the same behavior. Keep custom SCSS only for rules Bootstrap cannot express.
+- Replace inline styles and static layout CSS with Tailwind utilities when they provide the same behavior. Keep custom CSS/SCSS only for rules Tailwind cannot express.
 - Keep semantic structure intact: use `header`, `nav`, `main`, `footer`, `section`, `article`, and `form` appropriately. Add accurate `alt` text to meaningful images and `alt=""` to decorative images. Give every form control an associated label and every interactive control an accessible name.
 
 Do not mechanically replace a directive or input declaration without checking its surrounding template and all references. Do not convert a subscription merely to silence the audit if it owns cleanup, error handling, or an external event boundary.
@@ -59,7 +59,7 @@ Do not mechanically replace a directive or input declaration without checking it
 ### 2.3 SCSS cleanup
 
 - Move component rules into an appropriate global partial and add that partial through `@use` from the global entry point.
-- Replace hardcoded color literals with Bootstrap or repository token variables. Replace repeated spacing and sizing values with Bootstrap utilities or SCSS tokens where semantics remain clear.
+- Replace hardcoded color literals with Tailwind theme tokens or repository token variables. Replace repeated spacing and sizing values with Tailwind utilities or style tokens where semantics remain clear.
 - Do not hide forbidden colors or dimensions in CSS custom properties, strings, or generated values. Preserve focus styles and responsive behavior while changing the cascade.
 - Keep selectors scoped by component class or semantic region to prevent global leakage.
 

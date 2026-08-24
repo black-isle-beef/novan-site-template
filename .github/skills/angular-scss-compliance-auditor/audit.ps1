@@ -58,9 +58,9 @@ foreach ($file in $files) {
     Test-Pattern $file 'Angular control flow' '\*ng(If|For|Switch)' 'Replace structural directive syntax with @if, @for, or @switch.'
     Test-Pattern $file 'Legacy Angular APIs' '@(Input|Output)\b' 'Use input() or output() signal APIs.'
     Test-Pattern $file 'Untyped TypeScript' '(^|[^A-Za-z0-9_])(any)([^A-Za-z0-9_]|$)' 'Define an interface or type and narrow unknown values.'
-    Test-Pattern $file 'Inline styling' '(^|\s)style\s*=' 'Move styling into src/styles and use Bootstrap utilities.'
+    Test-Pattern $file 'Inline styling' '(^|\s)style\s*=' 'Move styling into the global stylesheet and use Tailwind utilities.'
     Test-Pattern $file 'Inline style binding' '\[style(?:\.|\])' 'Use a semantic class and global SCSS.'
-    Test-Pattern $file 'Hardcoded SCSS colors' '(#([0-9A-Fa-f]{3,8})\b|\b(?:rgba?|hsla?)\s*\()' 'Reference Bootstrap or repository SCSS variables.'
+    Test-Pattern $file 'Hardcoded SCSS colors' '(#([0-9A-Fa-f]{3,8})\b|\b(?:rgba?|hsla?)\s*\()' 'Reference Tailwind theme tokens or repository style variables.'
     Test-Pattern $file 'Angular module usage' '@NgModule\b|\bdeclarations\s*:' 'Use standalone architecture.'
     Test-Pattern $file 'Manual RxJS subscription' '\.subscribe\s*\(' 'Prefer signals or an async pipe where applicable.'
 }

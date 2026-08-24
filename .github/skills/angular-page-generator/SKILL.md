@@ -1,12 +1,12 @@
 ---
 name: angular-page-generator
-description: "Use when creating a new Angular page, route, or navigation entry in this repository. Generates a standalone page component with Bootstrap layout, breadcrumbs, SiteConfig references, lazy route metadata, SEO data, and header navigation registration."
+description: "Use when creating a new Angular page, route, or navigation entry in this repository. Generates a standalone page component with Tailwind CSS layout, breadcrumbs, SiteConfig references, lazy route metadata, SEO data, and header navigation registration."
 argument-hint: "Page name and route path, for example: Services /services"
 ---
 
 # Angular Page Generator
 
-Create a complete, production-ready page for this Angular application. Follow the repository's established standalone-component, Bootstrap 5, global-SCSS, configuration, and accessibility conventions.
+Create a complete, production-ready page for this Angular application. Follow the repository's established standalone-component, Tailwind CSS, global-style, configuration, and accessibility conventions.
 
 ## Inputs
 
@@ -42,11 +42,11 @@ Do not assume `src/app/core/config/navigation.config.ts` exists. In the current 
 ### Template and Accessibility
 
 1. Build the page with semantic elements, using `<article>` or `<section>` as the outer page landmark and a coherent heading hierarchy.
-2. Include a heading section containing the page title and a Bootstrap `.lead` description appropriate to the requested topic.
+2. Include a heading section containing the page title and a Tailwind-styled lead description appropriate to the requested topic.
 3. Include an accessible breadcrumb `<nav aria-label="Breadcrumb">` linking to Home and indicating the current page with `aria-current="page"`.
-4. Use native Bootstrap 5 layout and spacing utilities, including `container`, `row`, responsive `col-*`, `py-5`, and `gap-3` where useful.
+4. Use Tailwind CSS utilities for layout, spacing, typography, color, and responsive behavior, including `mx-auto`, `max-w-*`, `grid`, `flex`, `gap-*`, `px-*`, `py-*`, and responsive prefixes such as `sm:`, `md:`, and `lg:`.
 5. Add focused, topic-appropriate placeholder content rather than generic filler. Use semantic headings, paragraphs, lists, and calls to action as appropriate.
-6. Avoid inline styles, per-component stylesheets, and unnecessary custom CSS. Add a global SCSS partial only if Bootstrap utilities cannot express a needed reusable presentation rule.
+6. Avoid inline styles, per-component stylesheets, and unnecessary custom CSS. Add a global style rule only if Tailwind utilities cannot express a needed reusable presentation rule.
 7. Use valid native HTML semantics before adding ARIA. Ensure links and controls have accessible names.
 
 ### Route Registration
@@ -76,7 +76,7 @@ Keep route ordering intentional: add the page before the wildcard redirect and p
 
 Register the page in the primary header navigation source of truth. In the current codebase this is `navigationLinks` in `src/app/layout/header/header.component.ts`.
 
-- Add a typed entry with the normalized path, visible label, and an appropriate Bootstrap icon class (`bi-*`) if the current navigation model supports icons.
+- Add a typed entry with the normalized path and visible label. Use the repository's configured icon library if the navigation model supports icons; do not make a specific icon library a requirement.
 - Preserve intentional navigation ordering and active-link behavior.
 - If a future `navigation.config.ts` owns the links instead, update `headerItems` or the equivalent central collection there rather than duplicating data.
 

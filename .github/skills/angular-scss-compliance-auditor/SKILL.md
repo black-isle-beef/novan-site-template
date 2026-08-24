@@ -1,6 +1,6 @@
 ---
 name: angular-scss-compliance-auditor
-description: "Use when auditing or refactoring this Angular repository for standalone components, signal-based reactivity, modern control flow, strict TypeScript, centralized SiteConfig content, Bootstrap 5 utilities, global SCSS architecture, color-token usage, semantic HTML, and accessibility compliance."
+description: "Use when auditing or refactoring this Angular repository for standalone components, signal-based reactivity, modern control flow, strict TypeScript, centralized SiteConfig content, Tailwind CSS utilities, global style architecture, color-token usage, semantic HTML, and accessibility compliance."
 ---
 
 # Angular and SCSS Compliance Auditor
@@ -31,8 +31,9 @@ Act as a Principal Frontend Software Architect for this repository. This is an o
 
 - Custom styles live under `src/styles/` and are composed from `src/styles/styles.scss` using the repository's established `@use` hierarchy. Keep tokens in `abstracts/_variables.scss` and typography tokens in `abstracts/_typography.scss`; keep reusable component rules in `components/`.
 - Do not add inline `style="..."` attributes or Angular `[style]`/`[style.foo]` bindings. Use semantic classes and global SCSS.
-- Prefer native Bootstrap 5 utilities for layout, spacing, display, typography, color, and responsive behavior (`d-flex`, `gap-3`, `text-muted`, `py-4`, and similar). Add custom CSS only for behavior or visual rules Bootstrap cannot express.
-- Custom SCSS/CSS must not contain hardcoded color values: no hex, `rgb()`, `rgba()`, `hsl()`, or `hsla()`. Reference Bootstrap SCSS variables or repository-defined token variables. Do not hide colors in CSS custom properties or quoted strings to evade this rule.
+- Prefer Tailwind CSS utilities for layout, spacing, display, typography, color, and responsive behavior (`flex`, `gap-3`, `text-slate-600`, `py-4`, and similar). Add custom CSS only for behavior or visual rules Tailwind cannot express.
+- Keep Tailwind configured through the repository's main stylesheet and theme configuration. Do not introduce arbitrary utility values when an existing theme token expresses the value.
+- Custom SCSS/CSS must not contain hardcoded color values: no hex, `rgb()`, `rgba()`, `hsl()`, or `hsla()`. Reference Tailwind theme tokens or repository-defined token variables. Do not hide colors in CSS custom properties or quoted strings to evade this rule.
 - Do not introduce a new component stylesheet as part of a fix. When moving styles, preserve selectors and verify the resulting cascade.
 
 ## Mandatory Maintainability and Accessibility Rules
