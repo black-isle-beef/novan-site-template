@@ -1,3 +1,175 @@
+# Novan Site Kit
+
+Novan Site Kit is an Angular 22 starter and reusable package for building a small, accessible site with a Bootstrap shell. The repository contains the showcase application, the publishable Angular library, static assets, global styles, and authoring skills for compatible VS Code agent tooling.
+
+## What Gets Published
+
+The package is published as `@novan/site-kit` and contains:
+
+- A compiled Angular library with `provideNovanSiteKit`, `NOVAN_SITE_KIT_OPTIONS`, and `NovanSiteKitOptions`.
+- A complete starter template under `template/`, including the current app shell, routed pages, tests, styles, assets, and Angular configuration.
+- Global SCSS and the public favicon/hero assets under `styles/` and `public/`.
+- The repository's `.github/skills` content under `skills/`.
+
+The template is the complete feature set. The compiled library is the stable package entry point for shared providers and types. Application pages and shell components remain in the template so an existing application can adopt them without replacing its routing or component structure.
+
+## Requirements
+
+- Node.js 22 or newer
+- npm 11 or newer
+- Angular 22 application for the compiled library
+- Bootstrap 5.3 and RxJS 7.8 when using the supplied application template or shell styles
+
+The package does not invent a production domain. Configure the consuming application's site origin before enabling canonical URLs, sitemap generation, or other production SEO output.
+
+## Use In an Existing Angular Application
+
+Install the package and its peer dependencies:
+
+```powershell
+npm.cmd install @novan/site-kit bootstrap bootstrap-icons rxjs
+```
+
+Import the provider in the application configuration:
+
+```typescript
+import { ApplicationConfig } from '@angular/core';
+import { provideNovanSiteKit } from '@novan/site-kit';
+
+export const appConfig: ApplicationConfig = {
+	providers: [
+		provideNovanSiteKit({
+			assetsBasePath: '/assets',
+			enableCookieBanner: true,
+		}),
+	],
+};
+```
+
+The package provider is deliberately small and additive. It does not replace an application's router, root component, site configuration, or global styles. Copy the relevant files from `template/` when adopting the complete shell, then merge the routes and imports into the consuming application.
+
+## Adopt the Complete Starter
+
+The npm package includes the complete source template. After installing it, copy the template into a new or existing Angular workspace:
+
+```powershell
+npm.cmd install @novan/site-kit
+Copy-Item -Recurse node_modules/@novan/site-kit/template/src ./src
+Copy-Item -Recurse node_modules/@novan/site-kit/template/public ./public
+```
+
+Merge these template files rather than replacing an existing application blindly:
+
+- `template/src/app/` for the shell, pages, services, and configuration
+- `template/src/styles/` for the Bootstrap theme and global SCSS
+- `template/src/index.html` for the document defaults
+- `template/angular.json` for assets, styles, and Bootstrap's browser script
+- `template/tsconfig*.json` for the strict Angular compiler settings
+
+Install the template dependencies and start the app:
+
+```powershell
+npm.cmd install
+npm.cmd start
+```
+
+Open `http://localhost:4200/` in a browser. The included routes are `/`, `/about`, `/contact`, `/privacy`, and `/cookie-policy`.
+
+## Install the Authoring Skills
+
+Skills are editor-time instructions, not Angular runtime code. They are included in the package but are not copied automatically during `npm install`.
+
+From an Angular workspace, copy them explicitly:
+
+```powershell
+Copy-Item -Recurse node_modules/@novan/site-kit/skills ./.github/skills
+```
+
+The skills include page generation, SEO architecture, and SCSS/accessibility guidance. Their behavior depends on the agent tooling that discovers `.github/skills`; verify that your editor supports this convention before relying on them in automation.
+
+## Repository Development
+
+Install dependencies from the repository root:
+
+```powershell
+npm.cmd install
+```
+
+Run the showcase application:
+
+```powershell
+npm.cmd start
+```
+
+Build the demo application:
+
+```powershell
+npm.cmd run build:app
+```
+
+Build the Angular library only:
+
+```powershell
+npm.cmd run build:library
+```
+
+Prepare the complete publish directory:
+
+```powershell
+npm.cmd run build:package
+```
+
+This runs the library build and copies the template, styles, public assets, README, and skills into `dist/novan-site-kit/`.
+
+Create a local npm tarball without publishing:
+
+```powershell
+npm.cmd run pack:package
+```
+
+Inspect the package contents before publishing:
+
+```powershell
+npm.cmd pack ./dist/novan-site-kit --dry-run
+```
+
+Publish a versioned package from the generated directory:
+
+```powershell
+npm.cmd publish ./dist/novan-site-kit --access public
+```
+
+Publishing requires an npm account and registry authentication. The repository does not commit `dist/`; it is generated by the package build.
+
+## Testing
+
+Run the production build and accessibility suite:
+
+```powershell
+npm.cmd run test:a11y
+```
+
+Install Playwright Chromium once if needed:
+
+```powershell
+npx.cmd playwright install chromium
+```
+
+The accessibility suite starts from the production bundle and checks every application route with axe-core.
+
+## Package Versioning
+
+Update the version in `projects/novan-site-kit/package.json` before publishing. The generated package metadata is copied from that file by `scripts/prepare-package.mjs`.
+
+For a breaking Angular or public API change, publish a new major version. Keep Angular, Bootstrap, and RxJS peer dependency ranges aligned with the supported application versions.
+
+## Production Configuration
+
+Before deploying a consuming application, replace starter values in `template/src/app/core/config/site-config.ts` with approved company details, contact information, social URLs, and the real HTTPS production origin. Never publish `localhost` or an invented domain in canonical tags, `sitemap.xml`, or `robots.txt`.
+
+## License
+
+Add the project's license policy before publishing to a public registry.
 # novan-site-template
 
 Standalone Angular starter with Bootstrap layout components, routed pages, and a global SCSS theme.
